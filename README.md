@@ -1,4 +1,4 @@
-# Buld Burger Order
+# Build Burger Order
 
 ###### Tutorial react app.
 
