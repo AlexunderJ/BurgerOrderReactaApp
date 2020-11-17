@@ -1,16 +1,24 @@
-import React from "react";
+import React, { Component } from 'react';
 import Layout from "./pages/Layout";
 import BuilderBurger from "./pages/BurgerBuilder/BurgerBuilder";
 
-function App() {
+export default class App extends Component {
+   
+
+  render(){
   return (
     <div>
       <Layout>
         <p>Test</p>
-        <BuilderBurger />
+         <BuilderBurger />
       </Layout>
     </div>
   );
+  }
 }
 
-export default App;
+
+
+
+
+
