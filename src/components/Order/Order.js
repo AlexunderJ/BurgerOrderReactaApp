@@ -27,7 +27,7 @@ export default function Order(props) {
         );
     })
 
-    console.log(ingredients);
+ 
     return (
         <div className={classes.Order}>
             <p> Ingredients:  {ingredientOutput}</p>
