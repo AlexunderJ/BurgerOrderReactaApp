@@ -16,14 +16,68 @@ export const purchaseBurgerFail = (error) =>{
 };
 };
 
-export const purchaseBurgerStart = (orderData) =>{
+export const purchaseBurgerStart = ()=>{
+    return{
+        type: actionTypes.PURCHACSE_BURGER_START
+    };
+};
+
+export const purchaseBurger = (orderData) =>{
     return dispatch => {
+        purchaseBurgerStart();
             axios.post('/orders.json', orderData)
     .then(response => {
-        dispatch(purchaseBurgerSucces(response.data, orderData))
+        dispatch(purchaseBurgerSucces(response.data.name, orderData))
     })
    .catch(error =>{
        dispatch(purchaseBurgerFail(error)) ;
    })
 };
     };
+
+    export const purchaseInit = () =>{
+        return{
+            type: actionTypes.PURCHASE_INIT
+        }
+    }
+
+    export const fetchOrdersSucces = (orders) =>{
+        return{
+            type: actionTypes.FETCH_ORDERS_SUCCES,
+            orders: orders
+        }
+    };
+
+    export const fetchOrdersFail =(error) =>{
+        return{
+            type: actionTypes.FETCH_ORDERS_FAIL,
+            error: error
+        }
+    };
+
+    export const fetchOrdersStart = () =>{
+        return{
+            type: actionTypes.FETCH_ORDERS_START
+        }
+    };
+
+    export const fetchOrders = () =>{
+        return dispatch =>{
+            dispatch(fetchOrdersStart());
+            axios.get('/orders.json')
+            .then(res=>{
+                const fechedOrders=[];
+                for(let key in res.data){
+                    fechedOrders.push({
+                        ...res.data[key],
+                        id:key
+                    });
+                }
+                dispatch(fetchOrdersSucces(fechedOrders));
+            })
+            .catch(err=>{
+                dispatch(fetchOrdersFail(err));
+            })
+        }
+    }
+
