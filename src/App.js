@@ -5,6 +5,7 @@ import Layout from "./pages/Layout";
 import BuilderBurger from "./pages/BurgerBuilder/BurgerBuilder";
 import Checkout from "./pages/Checkout/Checkout";
 import Orders from "./pages/Orders/Orders";
+import Auth from '../src/pages/Auth/Auth';
 
 
 export default class App extends Component {
@@ -17,6 +18,7 @@ export default class App extends Component {
         <Switch>
          <Route path='/checkout' component={Checkout} />
          <Route path='/orders' component={Orders} />
+         <Route path='/auth' component={Auth} />
          <Route path='/' exact component={BuilderBurger} />
          </Switch>
           </Layout>
