@@ -1,10 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
-import {updateObject} from '../utility';
+import {updateObject} from '../../shered/utility';
+
 
 const initialState = {
     ingredients: null,
     totalPrice: 4,
-    error: false
+    error: false,
+    building: false
 };
 
 const INGREDIENT_PRICES = {
@@ -22,7 +24,8 @@ const reducer = (state=initialState,action)=>{
             const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
             const updatedState = {
                 ingredients: updatedIngredients,
-                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+                building: true
             }
             return updateObject(state, updatedState);
         case actionTypes.REMOVE_INGREDIENTS :
@@ -32,14 +35,16 @@ const reducer = (state=initialState,action)=>{
                     ...state.ingredients,
                     [action.ingredientName]:state.ingredients[action.ingredientName] - 1
                 },
-                totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+                totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+                building: true
             };
             case actionTypes.SET_INGREDIENTS:
                 return{
                     ...state,
                     ingredients: action.ingredients,
                     totalPrice:4,
-                    error: false
+                    error: false,
+                    building: false
                 };            
             case actionTypes.FETCH_INGREDIENTS_FAIL:
                 return{
